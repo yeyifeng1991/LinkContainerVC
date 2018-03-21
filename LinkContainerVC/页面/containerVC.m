@@ -18,7 +18,7 @@ static NSString * const cellID = @"cell";
 - (instancetype)initWithChildView;
 {
     if (self = [super init]) {
-        [self viewDidLoad];
+        //这里不能调用viewDidLoad
     }
     return self;
 }
@@ -28,6 +28,7 @@ static NSString * const cellID = @"cell";
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.view);
     }];
+    
     
 }
 #pragma mark - 数据源方法
