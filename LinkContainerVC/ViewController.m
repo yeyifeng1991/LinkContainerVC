@@ -15,6 +15,14 @@
 @property(nonatomic,strong) segmentView * segmentView;
 @property(nonatomic,strong) UIScrollView * containerScrollView;
 @end
+/*
+ 1.创建顶部的segmentView；点击按钮时根据点击属性进行相关操作，记住要把之前的属性功能清除
+ 1.1点击按钮的回调索引，根据索引计算出offset,对scrollView进行相关操作
+ 2.主页面上放置三个展示页面的控制器
+ 2.1根据滑动的offset拿到对应segment的按钮索引进行交互，展示需要显示的vc.view
+ */
+
+
 
 @implementation ViewController
 
@@ -84,11 +92,13 @@
 {
     if (!_segmentView) {
         _segmentView = [[segmentView alloc]initWithSegmentWithTitleArray:@[@"数组1",@"数组2",@"数组3"]];
-//        __weak typeof (self) weakSelf = self;
+#pragma mark - 重要
+        __weak typeof (self) weakSelf = self;
         _segmentView.segmentButton = ^(NSInteger index) {
-            
-            NSLog(@"拿到点击索引 -   %ld",index);
-            // 这里进行其他的操作
+                // 这里进行其他的操作
+            CGPoint offset = weakSelf.containerScrollView.contentOffset;
+            offset.x = index * weakSelf.containerScrollView.frame.size.width;
+            [weakSelf.containerScrollView setContentOffset:offset animated:YES ];
         };
     }
     return _segmentView;

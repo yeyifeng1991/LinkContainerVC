@@ -120,6 +120,8 @@
 #pragma mark - 移动指定的位置
 -(void)moveToCurrentSelectSegment:(NSInteger)index;
 {
+    UIButton * selectBtn = self.segementButtonArray[index];
+    [self clickBtn:selectBtn];
     
 }
 -(UIView *)bottomLine{
